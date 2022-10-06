@@ -1,10 +1,14 @@
 import style from './style.module.css'
 
 const Form = ({children, className: cn, }) => {
+  const onSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
-    <div className={`${style.form} ${cn}`}>
+    <form className={`${style.form} ${cn}`} onSubmit={onSubmit}>
       {children}
-    </div>
+    </form>
   )
 }
 

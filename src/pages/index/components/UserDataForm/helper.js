@@ -9,7 +9,7 @@ export const checkDate = (str) => {
   // если дата введене не корретно, то резултат сдвинится
   if (correctDate.getDate() !== day ) return false
   if (correctDate.getMonth() + 1 !== month) return false
-  if (correctDate.getFullYear() !== year) return false // !!! если год меньше 100 работает не корретно !!!
+  if (correctDate.getFullYear() !== year) return false // !!! если год меньше 100 работает не корректно !!!
   // дата не больше текущей
   if (Date.now() < correctDate.getTime()) return false
   // data не меньше 01.01.2010

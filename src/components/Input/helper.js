@@ -3,7 +3,7 @@ const insert = (str, index, insertStr) => {
 }
 
 export const checkEmail = (email) => {
-  return /^[^а-яА-Я]*[^\.а-яА-Я]{1}[@][^\.а-яА-Я]+[^а-яА-Я]?[^\.а-яА-Я]+[.][^\.а-яА-Я]{2}[^а-яА-Я]?$/.test(email)
+  return /^[^а-яА-Я]*[^\.а-яА-Я]{1}[@][^\.а-яА-Я]+[^а-яА-Я]?[^\.а-яА-Я]+[.][^\.а-яА-Я]{2}[^а-яА-Я]{0,}$/.test(email)
 }
 
 export const checkPhoneNumber = (str) => {
@@ -28,7 +28,6 @@ export const editPhoneNumber = (value, cb) => {
   if (value.length > 12) {
     value = value.slice(0, 12)
   }
-
   if (value.length > 10) {
     value = value.slice(0, 10) + '-' + value.slice(10)
   }
@@ -51,10 +50,8 @@ export const editDate = (value, cb) => {
   if(value.length > 8) {
     value = value.slice(0, 8)
   }
-
   if (value.length > 4)
     value = insert(value, 4, '.')
-
   if (value.length > 2)
     value = insert(value, 2, '.')
 

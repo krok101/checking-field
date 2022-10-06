@@ -10,7 +10,8 @@ const UserDataForm = () => {
   const commonParams = {
     isCheck:isCheck,
     required: true,
-    onChangeValue:() => setIsCheck(false)
+    className: style.input,
+    onChangeValue: () => setIsCheck(false),
   }
 
   return (
@@ -19,33 +20,25 @@ const UserDataForm = () => {
         <Input
           label='ФИО'
           type="userName"
-
           validator={checkFullName}
           normalize={editFullName}
-
           {...commonParams}
         />
         <Input
           label='Телефон'
           type="phone-number"
-          checkState={isCheck}
-          required
-          onChangeValue={() => setIsCheck(false)}
+          {...commonParams}
         />
         <Input
           label='Email'
           type="email"
-          isCheck={isCheck}
-          required
-          onChangeValue={() => setIsCheck(false)}
+          {...commonParams}
         />
         <Input
           label='Дата'
           type="date"
-          isCheck={isCheck}
-          required
           validator={checkDate}
-          onChangeValue={() => setIsCheck(false)}
+          {...commonParams}
         />
       </div>
       <Button
