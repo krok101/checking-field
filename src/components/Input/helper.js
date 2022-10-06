@@ -3,7 +3,7 @@ const insert = (str, index, insertStr) => {
 }
 
 export const checkEmail = (email) => {
-  return true
+  return /^[^а-яА-Я]*[^\.а-яА-Я]{1}[@][^\.а-яА-Я]+[^а-яА-Я]?[^\.а-яА-Я]+[.][^\.а-яА-Я]{2}[^а-яА-Я]?$/.test(email)
 }
 
 export const checkPhoneNumber = (str) => {

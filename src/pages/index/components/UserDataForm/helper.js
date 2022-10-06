@@ -25,17 +25,11 @@ export const checkFullName = (str) => {
   return true
 }
 
-export const editFullName = (value, cb) => {
-  value = value.replaceAll(/[^a-zA-Z- ]/g, '')
-
-  console.log(value)
-  console.log(value.match(/[a-z-]* /g))
-
-/*   value = value.match(/[a-z-]*[ ]?/g).forEach(el => {
-    el = el.trimEnd()
-    console.log('el:', el)
-    el = el[0].toUpperCase() + el.slice(1)
-  }).join(' ') */
-
+export const editFullName = (value) => {
+  value = value.replaceAll(/[^а-яА-Я- ]/g, '')
+  value = value.match(/[а-яА-Я-]+ |[а-яА-Я-]+$/g)
+    ?.slice(0, 3)
+    .map(el => el[0].toUpperCase() + el.slice(1).toLowerCase())
+    .join('') ?? ''
   return value
 }

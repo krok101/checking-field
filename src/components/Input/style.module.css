@@ -49,3 +49,7 @@
 .error label {
   color: red;
 }
+
+.error input {
+  color: red;
+}

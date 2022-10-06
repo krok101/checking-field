@@ -13,16 +13,35 @@ const UserDataForm = () => {
         <Input
           label='ФИО'
           type="userName"
-          isCheck={isCheck}
+          checkState={{isCheck, setIsCheck}}
           required
           validator={checkFullName}
           normalize={editFullName}
         />
-        <Input label='Телефон' type="phone-number" isCheck={isCheck} required/>
-        <Input label='Email' type="email" isCheck={isCheck} required/>
-        <Input label='Дата' type="date" isCheck={isCheck} required validator={checkDate}/>
+        <Input
+          label='Телефон'
+          type="phone-number"
+          checkState={{isCheck, setIsCheck}}
+          required
+        />
+        <Input
+          label='Email'
+          type="email"
+          checkState={{isCheck, setIsCheck}}
+          required
+        />
+        <Input
+          label='Дата'
+          type="date"
+          checkState={{isCheck, setIsCheck}}
+          required
+          validator={checkDate}
+        />
       </div>
-      <Button name='Продолжить' onClick={onValidate}/>
+      <Button
+        name='Продолжить'
+        onClick={onValidate}
+      />
     </Form>
   )
 }
