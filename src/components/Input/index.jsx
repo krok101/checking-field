@@ -2,12 +2,21 @@ import { useEffect, useRef, useState } from 'react'
 import style from './style.module.css'
 import { editDate, editPhoneNumber, checkPhoneNumber, checkEmail } from './helper'
 
-const Input = ({ label, type, className: cn, checkState, validator, required, normalize }) => {
+/**
+ * @param {string} label - заголово
+ * @param {string} type - тип данных (phone-number | date)
+ * @param {string} className - добавляет класс к общему контейнеру
+ * @param {boolean} isCheck - необходимо ли валидирирова поле
+ * @param {boolean} required - Обязательное ли поле
+ * @param {funсtion} validator - функция для валидации, в случае если не устраивает стандартная (return true | false)
+ * @param {funсtion} normalize - Для нормализации данных принимает строку (return string)
+ * @param {funсtion} onChangeValue - callback срабатывает после изменения даннх на вход получает строку
+ */
+const Input = ({ label, type, className: cn, isCheck, validator, required, normalize, onChangeValue }) => {
   const [value, setValue] = useState('')
   const [inFocus , setInFocus] = useState(false)
   const [isValid, setIsValid] = useState(true)
   const inputRef = useRef(null)
-  const { isCheck, setIsCheck } = checkState
 
   const getLabelClass = () => {
     let className = style.label
@@ -20,7 +29,7 @@ const Input = ({ label, type, className: cn, checkState, validator, required, no
     if (!isCheck) return
     const { value } = inputRef.current
 
-    if (required && !inputRef.current.value) setIsValid(false)
+    if (required && !inputRef.current.value) return setIsValid(false)
 
     if (validator) {
       // не стандартная валидация
@@ -33,12 +42,7 @@ const Input = ({ label, type, className: cn, checkState, validator, required, no
         default: setValue(value)
       }
     }
-  }, )
-
-  useEffect(() => {
-    // сбрасываем валидацию
-    if (setIsCheck) setIsCheck(false)
-  }, [value])
+  }, [isCheck])
 
   const onChange = (e) => {
     const {value} = e.target
@@ -51,6 +55,10 @@ const Input = ({ label, type, className: cn, checkState, validator, required, no
       default: setValue(value)
     }
   }
+
+  useEffect(() => {
+    if (onChangeValue) onChangeValue(value)
+  }, [value])
 
   return (
     <div className={`${style.container} ${isValid ? '': style.error} ${cn ?? ''}`}>

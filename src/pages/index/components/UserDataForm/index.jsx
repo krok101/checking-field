@@ -7,35 +7,45 @@ const UserDataForm = () => {
   const [isCheck, setIsCheck] = useState(false)
   const onValidate = () => setIsCheck(true)
 
+  const commonParams = {
+    isCheck:isCheck,
+    required: true,
+    onChangeValue:() => setIsCheck(false)
+  }
+
   return (
     <Form className={style.container}>
       <div className={style.body}>
         <Input
           label='ФИО'
           type="userName"
-          checkState={{isCheck, setIsCheck}}
-          required
+
           validator={checkFullName}
           normalize={editFullName}
+
+          {...commonParams}
         />
         <Input
           label='Телефон'
           type="phone-number"
-          checkState={{isCheck, setIsCheck}}
+          checkState={isCheck}
           required
+          onChangeValue={() => setIsCheck(false)}
         />
         <Input
           label='Email'
           type="email"
-          checkState={{isCheck, setIsCheck}}
+          isCheck={isCheck}
           required
+          onChangeValue={() => setIsCheck(false)}
         />
         <Input
           label='Дата'
           type="date"
-          checkState={{isCheck, setIsCheck}}
+          isCheck={isCheck}
           required
           validator={checkDate}
+          onChangeValue={() => setIsCheck(false)}
         />
       </div>
       <Button
